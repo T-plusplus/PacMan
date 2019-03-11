@@ -24,6 +24,18 @@ public class PlayerSettingsScript : MonoBehaviour {
     public int HighScore8;
     public int HighScore9;
     public int HighScore10;
+
+    public string Name1;
+    public string Name2;
+    public string Name3;
+    public string Name4;
+    public string Name5;
+    public string Name6;
+    public string Name7;
+    public string Name8;
+    public string Name9;
+    public string Name10;
+
     //public GameData prevGame;
     private readonly String PlaySetFile = "/playerSettings.dat";
     private readonly String GameFile = "/prevGame.dat";
@@ -66,6 +78,18 @@ public class PlayerSettingsScript : MonoBehaviour {
         data.HighScore8 = HighScore8;
         data.HighScore9 = HighScore9;
         data.HighScore10 = HighScore10;
+
+        data.Name1 = Name1;
+        data.Name2 = Name2;
+        data.Name3 = Name3;
+        data.Name4 = Name4;
+        data.Name5 = Name5;
+        data.Name6 = Name6;
+        data.Name7 = Name7;
+        data.Name8 = Name8;
+        data.Name9 = Name9;
+        data.Name10 = Name10;
+
         bf.Serialize(file, data);
         file.Close();
     }
@@ -88,6 +112,16 @@ public class PlayerSettingsScript : MonoBehaviour {
             HighScore9 = data.HighScore9;
             HighScore10 = data.HighScore10;
 
+            Name1 = data.Name1;
+            Name2 = data.Name2;
+            Name3 = data.Name3;
+            Name4 = data.Name4;
+            Name5 = data.Name5;
+            Name6 = data.Name6;
+            Name7 = data.Name7;
+            Name8 = data.Name8;
+            Name9 = data.Name9;
+            Name10 = data.Name10;
             SelChoice = data.SelChoice;
             score=data.score;
         }
@@ -108,6 +142,17 @@ public class PlayerSettingsScript : MonoBehaviour {
             data.HighScore8 = 0;
             data.HighScore9 = 0;
             data.HighScore10 = 0;
+
+            Name1 = "AAA";
+            Name2 = "AAA";
+            Name3 = "AAA";
+            Name4 = "AAA";
+            Name5 = "AAA";
+            Name6 = "AAA";
+            Name7 = "AAA";
+            Name8 = "AAA";
+            Name9 = "AAA";
+            Name10 = "AAA";
             bf.Serialize(file, data);
             file.Close();
         }
@@ -129,6 +174,16 @@ public class PlayerSettingsScript : MonoBehaviour {
         public int HighScore9;
         public int HighScore10;
 
+        public string Name1;
+        public string Name2;
+        public string Name3;
+        public string Name4;
+        public string Name5;
+        public string Name6;
+        public string Name7;
+        public string Name8;
+        public string Name9;
+        public string Name10;
     }
 
 }

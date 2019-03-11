@@ -257,7 +257,7 @@ public class LevelScript : MonoBehaviour {
     {
         Time.timeScale = 1;
         PlayerSettingsScript.PlayerSettings.SaveSettings();
-        SceneManager.LoadScene("StartMenu_Andr", LoadSceneMode.Single);
+        SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
         gs.SaveGame();
     }
     

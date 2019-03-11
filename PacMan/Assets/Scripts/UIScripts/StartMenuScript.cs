@@ -4,22 +4,58 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartMenuScript : MonoBehaviour {
-    public Button startTX;
-    public Button settingsTX;
-    public Button aboutTX;
-    public Button HighScoresTX;
+public class StartMenuScript : MonoBehaviour
+{
+    private Button startTX;
+    private Button settingsTX;
+    private Button aboutTX;
+    private Button HighScoresTX;
 
+    private readonly string startT = "PlayButton";
+    private readonly string setT = "SettingsButton";
+    private readonly string abT = "AboutButton";
+    private readonly string hsT = "HighScoresButton";
+    public Canvas WinCanvas;
+    public Canvas AndrCanvas;
     //PlayerSettingsScript.
-    // Use this for initialization
-    void Start () {
-        startTX = startTX.GetComponent<Button>();
-        settingsTX = settingsTX.GetComponent<Button>();
-        aboutTX = aboutTX.GetComponent<Button>();
-        HighScoresTX = HighScoresTX.GetComponent<Button>();
+    
+    private void Awake()
+    {
+        //As new devices are added, we want to print to the debug console what version, and deactivate the necessary UI panels.
+#if UNITY_EDITOR_WIN
+#if UNITY_ANDROID
+        Debug.Log("Android-Edit");
+        WinCanvas.gameObject.SetActive(false);
+#elif UNITY_WEBGL
+        Debug.Log("WebGL Edit");
+#else
+        Debug.Log("Win Edit");
+        AndrCanvas.gameObject.SetActive(false);
+#endif //andr-webgl-else this tests the platform settings being used in the Unity window. 
+#endif //UNITY_EDITOR_WIN
+#if UNITY_ANDROID
+        Debug.Log("Android");
+        WinCanvas.gameObject.SetActive(false);
+#endif
+#if UNITY_STANDALONE_WIN
+        Debug.Log("Win");
+        AndrCanvas.gameObject.SetActive(false);
+#endif
     }
-	
-	public void StartClick()
+    void Start()
+    {
+        startTX = GameObject.Find(startT).GetComponent<Button>();
+        //startTX = startTX.GetComponent<Button>();
+        settingsTX = GameObject.Find(setT).GetComponent<Button>();
+        aboutTX = GameObject.Find(abT).GetComponent<Button>();
+        HighScoresTX = GameObject.Find(hsT).GetComponent<Button>();
+        startTX.onClick.AddListener(StartClick);
+        settingsTX.onClick.AddListener(SettingsClick);
+        aboutTX.onClick.AddListener(AboutClick);
+        HighScoresTX.onClick.AddListener(HighScoresClick);
+    }
+
+    public void StartClick()
     {
         //if no saved game
         GameSaveScr gss = GameObject.Find("GameSave").GetComponent<GameSaveScr>();

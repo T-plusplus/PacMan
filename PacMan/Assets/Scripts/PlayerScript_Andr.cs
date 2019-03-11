@@ -267,7 +267,7 @@ public class PlayerScript_Andr : MonoBehaviour
                     gss.score = 0;
                     PlayerSettingsScript.PlayerSettings.SaveSettings();
                     gss.SaveGame();
-                    SceneManager.LoadScene("StartMenu_Andr", LoadSceneMode.Single);
+                    SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
                 }
                 else
                 {

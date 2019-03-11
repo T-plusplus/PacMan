@@ -7,23 +7,29 @@ using UnityEngine.UI;
 
 public class HighScoreScript : MonoBehaviour
 {
-    private readonly string hs = "HighScore";
-    public Button Back_B;
+    private readonly string hs = "HS";
+    private readonly string hsName_name = "Name";
+    private readonly string Back_name = "Back";
+    private Button Back_B;
     
-    Text HS1_TXT;
-    Text HS2_TXT;
-    Text HS3_TXT;
-    Text HS4_TXT;
-    Text HS5_TXT;
-    Text HS6_TXT;
-    Text HS7_TXT;
-    Text HS8_TXT;
-    Text HS9_TXT;
-    Text HS10_TXT;
-    // Use this for initialization
+    private Text HS1_TXT;
+    private Text HS2_TXT;
+    private Text HS3_TXT;
+    private Text HS4_TXT;
+    private Text HS5_TXT;
+    private Text HS6_TXT;
+    private Text HS7_TXT;
+    private Text HS8_TXT;
+    private Text HS9_TXT;
+    private Text HS10_TXT;
+
+    private Text[] Names = new Text[10];
+    //We find UI texts and set them like this because of how we save them. The file doesn't like to persist arrays. you have to encapsulate it
+    //in a different serializable object. I know how, it's just a pretty massive backend update for something that will not affect the game in 
+    //a way that someone would see while playing. 
     void Start()
     {
-        Back_B = Back_B.GetComponent<Button>();
+        Back_B = GameObject.Find(Back_name).GetComponent<Button>();
         //for (int x = 0; x < 10; x++)
         // {
         //   int y = x + 1;
@@ -61,9 +67,23 @@ public class HighScoreScript : MonoBehaviour
         
         HS10_TXT = GameObject.Find("HighScore10").GetComponent<Text>();
         HS10_TXT.text = PlayerSettingsScript.PlayerSettings.HighScore10.ToString();
+
+        for(int i=1; i<=10; i++)
+            Names[i-1] = GameObject.Find(hsName_name + i).GetComponent<Text>();
+        //Names[0] = GameObject.Find("Name1").GetComponent<Text>();
+        Names[0].text = PlayerSettingsScript.PlayerSettings.Name1.ToString();
+        Names[1].text = PlayerSettingsScript.PlayerSettings.Name2.ToString();
+        Names[2].text = PlayerSettingsScript.PlayerSettings.Name3.ToString();
+        Names[3].text = PlayerSettingsScript.PlayerSettings.Name4.ToString();
+        Names[4].text = PlayerSettingsScript.PlayerSettings.Name5.ToString();
+        Names[5].text = PlayerSettingsScript.PlayerSettings.Name6.ToString();
+        Names[6].text = PlayerSettingsScript.PlayerSettings.Name7.ToString();
+        Names[7].text = PlayerSettingsScript.PlayerSettings.Name8.ToString();
+        Names[8].text = PlayerSettingsScript.PlayerSettings.Name9.ToString();
+        Names[9].text = PlayerSettingsScript.PlayerSettings.Name10.ToString();
     }
     public void Back_OnClick()
     {
-        SceneManager.LoadScene("StartMenu_Andr");
+        SceneManager.LoadScene("StartMenu");
     }
 }
