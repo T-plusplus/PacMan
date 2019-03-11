@@ -22,7 +22,7 @@ public class AboutScript : MonoBehaviour {
         WinCanvas.gameObject.SetActive(false);
 #elif UNITY_WEBGL
         Debug.Log("About Page: WebGL Edit");
-        //Haven't decided which to go with.
+        AndrCanvas.gameObject.SetActive(false);
 #else
         Debug.Log("About Page: Win Edit");
         AndrCanvas.gameObject.SetActive(false);
@@ -36,7 +36,10 @@ public class AboutScript : MonoBehaviour {
         Debug.Log("About Page: Win");
         AndrCanvas.gameObject.SetActive(false);
 #endif
-
+#if UNITY_WEBGL
+        Debug.Log("About Page: WebGL");
+        AndrCanvas.gameObject.SetActive(false);
+#endif
     }
     void Start () {
         Back_B = GameObject.Find(Back_name).GetComponent<Button>();

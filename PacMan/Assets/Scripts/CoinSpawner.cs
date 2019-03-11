@@ -63,10 +63,10 @@ private void CreatePrefab(float x, float z, Vector3[] powerUps)
     bool f = Valid(pos, Vector3.forward);
     bool b = Valid(pos, Vector3.back);
         //Debug.Log(c.transform.position + " L" + l + " R "+r + " F " + f + " b " + b);
-#if UNITY_EDITOR_WIN
+//#if UNITY_EDITOR_WIN
 //stop. we're creating one prefab to test maze advancement. Otherwise, picking up 300 pickups and not dying is going to be
 //time consuming and irritating.
-#else
+//#else
         if (l)
         CreatePrefab(x - 1, z, powerUps);
     if (r)
@@ -75,7 +75,7 @@ private void CreatePrefab(float x, float z, Vector3[] powerUps)
         CreatePrefab(x, z + 1, powerUps);
     if (b)
         CreatePrefab(x, z - 1, powerUps);
-#endif
+//#endif
 }
 private void CreatePrefabsFromSave()
 {

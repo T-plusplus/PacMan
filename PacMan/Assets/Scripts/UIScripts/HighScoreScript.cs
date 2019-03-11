@@ -38,7 +38,7 @@ public class HighScoreScript : MonoBehaviour
         WinCanvas.gameObject.SetActive(false);
 #elif UNITY_WEBGL
         Debug.Log("High Scores Page: WebGL Edit");
-        //Haven't decided which to go with.
+        AndrCanvas.gameObject.SetActive(false);
 #else
         Debug.Log("High Scores Page: Win Edit");
         AndrCanvas.gameObject.SetActive(false);
@@ -52,7 +52,10 @@ public class HighScoreScript : MonoBehaviour
         Debug.Log("High Scores Page: Win");
         AndrCanvas.gameObject.SetActive(false);
 #endif
-
+#if UNITY_WEBGL
+        Debug.Log("High Scores Page: WebGL");
+        AndrCanvas.gameObject.SetActive(false);
+#endif
     }
     //We find UI texts and set them like this because of how we save them. The file doesn't like to persist arrays. you have to encapsulate it
     //in a different serializable object. I know how, it's just a pretty massive backend update for something that will not affect the game in 

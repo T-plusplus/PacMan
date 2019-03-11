@@ -32,7 +32,7 @@ public class SettingsPageScript : MonoBehaviour {
         WinCanvas.gameObject.SetActive(false);
 #elif UNITY_WEBGL
         Debug.Log("Settings Page: WebGL Edit");
-        //Haven't decided which to go with.
+        AndrCanvas.gameObject.SetActive(false);
 #else
             Debug.Log("Settings Page: Win Edit");
             AndrCanvas.gameObject.SetActive(false);
@@ -46,7 +46,10 @@ public class SettingsPageScript : MonoBehaviour {
             Debug.Log("Settings Page: Win");
             AndrCanvas.gameObject.SetActive(false);
 #endif
-        
+#if UNITY_WEBGL
+        Debug.Log("Settings Page: WebGL");
+        AndrCanvas.gameObject.SetActive(false);
+#endif
     }
     //Use start to manage the components within the screens.
     void Start () {

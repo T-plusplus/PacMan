@@ -24,21 +24,26 @@ public class StartMenuScript : MonoBehaviour
         //As new devices are added, we want to print to the debug console what version, and deactivate the necessary UI panels.
 #if UNITY_EDITOR_WIN
 #if UNITY_ANDROID
-        Debug.Log("Android-Edit");
+        Debug.Log("Start: Android-Edit");
         WinCanvas.gameObject.SetActive(false);
 #elif UNITY_WEBGL
-        Debug.Log("WebGL Edit");
+        Debug.Log("Start: WebGL Edit");
+        AndrCanvas.gameObject.SetActive(false);
 #else
-        Debug.Log("Win Edit");
+        Debug.Log("Start: Win Edit");
         AndrCanvas.gameObject.SetActive(false);
 #endif //andr-webgl-else this tests the platform settings being used in the Unity window. 
 #endif //UNITY_EDITOR_WIN
 #if UNITY_ANDROID
-        Debug.Log("Android");
+        Debug.Log("Start: Android");
         WinCanvas.gameObject.SetActive(false);
 #endif
 #if UNITY_STANDALONE_WIN
-        Debug.Log("Win");
+        Debug.Log("Start: Win");
+        AndrCanvas.gameObject.SetActive(false);
+#endif
+#if UNITY_WEBGL
+        Debug.Log("Start: WebGL");
         AndrCanvas.gameObject.SetActive(false);
 #endif
     }
