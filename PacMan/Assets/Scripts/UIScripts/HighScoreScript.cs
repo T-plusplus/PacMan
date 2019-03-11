@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class HighScoreScript : MonoBehaviour
 {
-    private readonly string hs = "HS";
-    private readonly string hsName_name = "Name";
-    private readonly string Back_name = "Back";
+    public Canvas WinCanvas;
+    public Canvas AndrCanvas;
+
     private Button Back_B;
     
     private Text HS1_TXT;
@@ -23,13 +23,44 @@ public class HighScoreScript : MonoBehaviour
     private Text HS9_TXT;
     private Text HS10_TXT;
 
+    private readonly string hs = "HS";
+    private readonly string hsName_name = "Name";
+    private readonly string Back_name = "Back";
     private Text[] Names = new Text[10];
+    
+    private void Awake()
+    {
+        //As new devices are added, remember to look at what's needed for UI, and deactivate those panels and bind the relevant pieces. Also as new controls 
+        //are added, add those as well.
+#if UNITY_EDITOR_WIN
+#if UNITY_ANDROID
+        Debug.Log("High Scores Page: Android Edit");
+        WinCanvas.gameObject.SetActive(false);
+#elif UNITY_WEBGL
+        Debug.Log("High Scores Page: WebGL Edit");
+        //Haven't decided which to go with.
+#else
+        Debug.Log("High Scores Page: Win Edit");
+        AndrCanvas.gameObject.SetActive(false);
+#endif //andr-webgl-else this tests the platform settings being used in the Unity window. 
+#endif //UNITY_EDITOR_WIN
+#if UNITY_ANDROID
+        Debug.Log("High Scores Page: Android");
+        WinCanvas.gameObject.SetActive(false);
+#endif
+#if UNITY_STANDALONE_WIN
+        Debug.Log("High Scores Page: Win");
+        AndrCanvas.gameObject.SetActive(false);
+#endif
+
+    }
     //We find UI texts and set them like this because of how we save them. The file doesn't like to persist arrays. you have to encapsulate it
     //in a different serializable object. I know how, it's just a pretty massive backend update for something that will not affect the game in 
     //a way that someone would see while playing. 
     void Start()
     {
         Back_B = GameObject.Find(Back_name).GetComponent<Button>();
+        Back_B.onClick.AddListener(Back_OnClick);
         //for (int x = 0; x < 10; x++)
         // {
         //   int y = x + 1;
