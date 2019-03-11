@@ -62,6 +62,8 @@ public class SettingsPageScript : MonoBehaviour {
 #if UNITY_ANDROID
         Swipe_B = GameObject.Find(Swipe_name).GetComponent<Button>();
         Joystick_B = GameObject.Find(Joystick_name).GetComponent<Button>();
+        Swipe_B.onClick.AddListener(Swipe_OnClick);
+        Joystick_B.onClick.AddListener(JS_OnClick);
 #endif
         GetSelectedInput();
     }

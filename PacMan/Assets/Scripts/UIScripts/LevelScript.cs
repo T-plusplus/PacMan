@@ -26,7 +26,7 @@ public class LevelScript : MonoBehaviour {
     /// </summary>
     public GameObject Accel_Cont;
 
-    public GameSaveScr gs;
+    private GameSaveScr gs;
     public Canvas PauseMenu;
     public Button PauseButton;
     public Image js_top;
@@ -37,7 +37,7 @@ public class LevelScript : MonoBehaviour {
     private Image L4;
     private Image L5;
 
-    public PlayerScript_Andr Player;
+    private PlayerScript_Andr Player;
     // Use this for initialization
     void Start () {
         gs = GameObject.Find("GameSave").GetComponent<GameSaveScr>();
@@ -79,9 +79,9 @@ public class LevelScript : MonoBehaviour {
         }
         //Image stuff
         
-         L1 = GameObject.Find("Life1").GetComponent<Image>();
-         L2 = GameObject.Find("Life2").GetComponent<Image>();
-         L3 = GameObject.Find("Life3").GetComponent<Image>();
+        L1 = GameObject.Find("Life1").GetComponent<Image>();
+        L2 = GameObject.Find("Life2").GetComponent<Image>();
+        L3 = GameObject.Find("Life3").GetComponent<Image>();
         L4 = GameObject.Find("Life4").GetComponent<Image>();
         L5 = GameObject.Find("Life5").GetComponent<Image>();
         

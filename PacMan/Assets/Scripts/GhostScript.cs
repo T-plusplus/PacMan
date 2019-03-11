@@ -56,7 +56,9 @@ public class GhostScript : MonoBehaviour
         //above may be used later, but for now it will all be random.
         if (!isSpawned)
         {
+            //Debug.Log(gameObject.name + dir);
             dir = Vector3.zero;
+            rb.velocity = vel * dir;
             if (SpawnTime <= 0)
             {
                 isSpawned = true;
@@ -101,8 +103,8 @@ public class GhostScript : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().material = mat1;
         }
-        if (gameObject.transform.position.y < .45f || gameObject.transform.position.y> .55f)
-            gameObject.transform.position =new Vector3(gameObject.transform.position.x, .5f, gameObject.transform.position.z);
+        //if (gameObject.transform.position.y < .45f || gameObject.transform.position.y> .55f)
+         //   gameObject.transform.position =new Vector3(gameObject.transform.position.x, .5f, gameObject.transform.position.z);
         //Debug.Log("Ghost: L " + Valid(Vector3.left) + " R " + Valid(Vector3.right) + " U " + Valid(Vector3.forward) + " D " + Valid(Vector3.back));
     }
     private void OnTriggerEnter(Collider other)
