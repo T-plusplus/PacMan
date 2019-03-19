@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    public float vel;
+    public float speed;
     //public float speed;
     private Vector3 dir;
     private Rigidbody rb;
@@ -53,8 +53,8 @@ public class PlayerScript : MonoBehaviour
         //if the input direction changes, and the input is valid, change direction
         if (mv != dir && Valid(mv))
         {
-            rb.velocity = vel * mv;
-            dir = vel * mv;
+            rb.velocity = speed * mv;
+            dir = speed * mv;
         }
         //otherwise maintain direction
         else

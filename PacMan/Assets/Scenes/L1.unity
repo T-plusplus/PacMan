@@ -1310,7 +1310,7 @@ GameObject:
   - component: {fileID: 254039611}
   - component: {fileID: 254039610}
   m_Layer: 5
-  m_Name: CM_Score
+  m_Name: CG_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1698,11 +1698,9 @@ MonoBehaviour:
   DPad_Cont: {fileID: 623823276}
   Swipe_Cont: {fileID: 791896405}
   Accel_Cont: {fileID: 861300123}
-  gs: {fileID: 0}
   PauseMenu: {fileID: 1421650182}
   PauseButton: {fileID: 287920076}
   js_top: {fileID: 534823784}
-  Player: {fileID: 0}
 --- !u!114 &291110427
 MonoBehaviour:
   m_ObjectHideFlags: 0

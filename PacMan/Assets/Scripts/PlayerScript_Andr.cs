@@ -20,6 +20,8 @@ public class PlayerScript_Andr : MonoBehaviour
     private readonly string CoinTag = "Coin";
     private readonly int PowUpSc = 50;
     private readonly int CoinSc = 10;
+    private readonly string curGameLabel = "CG_Score";
+    private readonly string HSLabel = "GH_Score";
     private Vector3 startVec;
     private float respawnTime=0f;
     public Material mat1;
@@ -38,9 +40,8 @@ public class PlayerScript_Andr : MonoBehaviour
         //start right
         dir = Vector3.right;
         startVec = gameObject.transform.position;
-        myTextgameObject = GameObject.Find("CM_Score");
         // Get component Text from that gameObject
-        gameScore = myTextgameObject.GetComponent<Text>();
+        gameScore = GameObject.Find(curGameLabel).GetComponent<Text>();
         // Assign new string to "Text" field in that component
         //gameScore.text = PlayerSettingsScript.PlayerSettings.score.ToString();
         GameSaveScr gss = GameObject.Find("GameSave").GetComponent<GameSaveScr>();
@@ -49,8 +50,8 @@ public class PlayerScript_Andr : MonoBehaviour
         CSref = GameObject.Find("CoinSpawn");
         CS_scriptRef = CSref.GetComponent<CoinSpawner>();
 
-        HighScoreGO = GameObject.Find("GH_Score");
-        HS_TXT = HighScoreGO.GetComponent<Text>();
+        //HighScoreGO = ;
+        HS_TXT = GameObject.Find(HSLabel).GetComponent<Text>();
         
 
 

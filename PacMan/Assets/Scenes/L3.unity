@@ -7898,7 +7898,7 @@ GameObject:
   - component: {fileID: 1127348908}
   - component: {fileID: 1127348907}
   m_Layer: 5
-  m_Name: CM_Score
+  m_Name: CG_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8568,7 +8568,6 @@ MonoBehaviour:
   PauseMenu: {fileID: 396886989}
   PauseButton: {fileID: 725563878}
   js_top: {fileID: 1826711537}
-  Player: {fileID: 0}
 --- !u!114 &1231810124
 MonoBehaviour:
   m_ObjectHideFlags: 0
