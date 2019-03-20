@@ -6,6 +6,7 @@ public class SettingsPageScript : MonoBehaviour {
     private Button Dpad_B;
     private Button Swipe_B;
     private Button Joystick_B;
+    private Button Keyboard_B;
     private Button Back_B;
     private Button ResetHighScores_B;
     private Text SelInputTX;
@@ -16,6 +17,7 @@ public class SettingsPageScript : MonoBehaviour {
     private readonly string Dpad_name = "DPad";
     private readonly string Swipe_name = "Swipe";
     private readonly string Joystick_name = "Accel";
+    private readonly string Keyboard_name = "Keyboard";
     private readonly string Back_name = "Back";
     private readonly string ResetHighScores = "ResetHighScores";
     private readonly string SelInput = "Selected";
@@ -68,6 +70,10 @@ public class SettingsPageScript : MonoBehaviour {
         Swipe_B.onClick.AddListener(Swipe_OnClick);
         Joystick_B.onClick.AddListener(JS_OnClick);
 #endif
+#if UNITY_STANDALONE_WIN
+        Keyboard_B = GameObject.Find(Keyboard_name).GetComponent<Button>();
+        Keyboard_B.onClick.AddListener(Keyboard_OnClick);
+#endif
         GetSelectedInput();
     }
     public void DPad_OnClick()
@@ -91,6 +97,12 @@ public class SettingsPageScript : MonoBehaviour {
         PlayerSettingsScript.PlayerSettings.SaveSettings();
         GetSelectedInput();
     }
+    public void Keyboard_OnClick()
+    {
+        PlayerSettingsScript.PlayerSettings.SelChoice = PlayerSettingsScript.InputChoices.keyboard;
+        PlayerSettingsScript.PlayerSettings.SaveSettings();
+        GetSelectedInput();
+    }
     public void Back_OnClick()
     {
         SceneManager.LoadScene("StartMenu");
@@ -99,12 +111,14 @@ public class SettingsPageScript : MonoBehaviour {
     {
         //Debug.Log(PlayerSettingsScript.PlayerSettings.SelChoice);
         PlayerSettingsScript.InputChoices cur = PlayerSettingsScript.PlayerSettings.SelChoice;
-        if(cur==PlayerSettingsScript.InputChoices.dpad)
-            SelInputTX.text="Directional Pad";
+        if (cur == PlayerSettingsScript.InputChoices.dpad)
+            SelInputTX.text = "Directional Pad";
         else if (cur == PlayerSettingsScript.InputChoices.swipe)
             SelInputTX.text = "Swipe";
         else if (cur == PlayerSettingsScript.InputChoices.accel)
             SelInputTX.text = "Joystick/Accelerometer";
+        else if (cur == PlayerSettingsScript.InputChoices.keyboard)
+            SelInputTX.text = "Keyboard(WASD)";
         //If we get here, something is wrong
         else
             Debug.Log("cannot get input from persistence");

@@ -10,7 +10,7 @@ public class PlayerSettingsScript : MonoBehaviour {
 
     public static PlayerSettingsScript PlayerSettings;
 
-    public enum InputChoices { dpad = 1, swipe, accel };
+    public enum InputChoices { dpad = 1, swipe, accel, keyboard };
     public InputChoices SelChoice;
     public int score;
     
@@ -156,6 +156,33 @@ public class PlayerSettingsScript : MonoBehaviour {
             bf.Serialize(file, data);
             file.Close();
         }
+        //curve and adjust inputs to fit device compatibility
+        bool dpad_compat = true;
+        bool accel_compat = true;
+        bool swipe_compat = true;
+        bool keyboard_compat = true;
+
+#if UNITY_ANDROID
+        dpad_compat=true;
+        accel_compat = true;
+        swipe_compat = true;
+        keyboard_compat = false;
+#endif
+#if UNITY_STANDALONE_WIN
+        dpad_compat = true;
+        accel_compat = false;
+        swipe_compat = false;
+        keyboard_compat = true;
+#endif
+        if (!dpad_compat && (SelChoice == InputChoices.dpad))
+            SelChoice = InputChoices.keyboard;
+        if (!accel_compat && (SelChoice == InputChoices.accel))
+            SelChoice = InputChoices.keyboard;
+        if (!swipe_compat && (SelChoice == InputChoices.swipe))
+            SelChoice = InputChoices.keyboard;
+        if (!keyboard_compat && (SelChoice == InputChoices.keyboard))
+            SelChoice = InputChoices.dpad;
+
     }
 
     [Serializable]

@@ -37,7 +37,7 @@ public class LevelScript : MonoBehaviour {
     private Image L4;
     private Image L5;
 
-    private PlayerScript_Andr Player;
+    private PlayerScript Player;
     // Use this for initialization
     void Start () {
         gs = GameObject.Find("GameSave").GetComponent<GameSaveScr>();
@@ -46,10 +46,21 @@ public class LevelScript : MonoBehaviour {
         PauseMenu = GameObject.Find("/PauseMenu").GetComponent<Canvas>();
         PauseButton = PauseButton.GetComponent<Button>();
         PauseMenu.enabled = false;
-        Player = GameObject.Find("Player").GetComponent<PlayerScript_Andr>();
+        Player = GameObject.Find("Player").GetComponent<PlayerScript>();
         //c = GameObject.Find("/Controls").GetComponent<Canvas>();
         cur = PlayerSettingsScript.PlayerSettings.SelChoice;
         Debug.Log("Level Init: control - " + cur);
+        if(cur==PlayerSettingsScript.InputChoices.keyboard)
+        {
+            DPad_Cont.SetActive(true);
+            Swipe_Cont.SetActive(false);
+            Accel_Cont.SetActive(false);
+
+            Up_B = Up_B.GetComponent<Button>();
+            Down_B = Down_B.GetComponent<Button>();
+            Left_B = Left_B.GetComponent<Button>();
+            Right_B = Right_B.GetComponent<Button>();
+        }
         if (cur == PlayerSettingsScript.InputChoices.dpad)
         {
             DPad_Cont.SetActive(true);
@@ -108,7 +119,27 @@ public class LevelScript : MonoBehaviour {
                 }
             }
         }
-        if (cur==PlayerSettingsScript.InputChoices.accel)
+        if (cur == PlayerSettingsScript.InputChoices.keyboard)
+        {
+            float horiz = Input.GetAxis("Horizontal");
+            float vert = Input.GetAxis("Vertical");
+            if (vert != 0)
+            {
+                if (vert > 0)
+                    UpClick();
+                else if (vert < 0)
+                    DownClick();
+            }
+            else
+            {
+                if (horiz > 0)
+                    RightClick();
+                else if (horiz < 0)
+                    LeftClick();
+            }
+
+        }
+        else if (cur==PlayerSettingsScript.InputChoices.accel)
         {
             //Here's a link for help: https://docs.unity3d.com/ScriptReference/Input-acceleration.html
             //Here's a link for help: https://docs.unity3d.com/Manual/MobileInput.html
@@ -119,7 +150,7 @@ public class LevelScript : MonoBehaviour {
             bool rightCri = Input.acceleration.x > .5;
             //if(tilt up){
             //Debug.Log(Input.acceleration.x+"    "+Input.acceleration.y+ "      "+Input.acceleration.z);
-            //parallel to eyesight(if this is the best description of what i mean)
+            //parallel to eyesight(if this is the best description of what I mean)
             bool forwardBack = Input.acceleration.y>-.7 || Input.acceleration.y < -.97;
             bool leftRight = Input.acceleration.x>.5 || Input.acceleration.x<-.5 ;
             //Debug.Log(" F-B " + forwardBack + " l-r " + leftRight);
