@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - GTrig
   - GJTrig
+  - HS_Sel
   layers:
   - Default
   - TransparentFX

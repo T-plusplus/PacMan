@@ -10,6 +10,9 @@ public class PlayerScript : MonoBehaviour
     // Glowing wall outlines
     //Flames: https://unity3d.com/learn/tutorials/topics/graphics/flame-particles-overview?playlist=17102
     public float speed;
+    /// <summary>
+    /// Vector representing the current direction.
+    /// </summary>
     private Vector3 dir;
     private Rigidbody rb;
 
@@ -22,6 +25,9 @@ public class PlayerScript : MonoBehaviour
     private readonly string HSLabel = "GH_Score";
     private readonly string GameSaveLabel = "GameSave";
     private readonly string CoinSpawnerLabel = "CoinSpawn";
+    /// <summary>
+    /// The place where the player starts and respawns.
+    /// </summary>
     private Vector3 startVec;
     private float respawnTime=0f;
     public Material mat1;
@@ -30,7 +36,10 @@ public class PlayerScript : MonoBehaviour
     private readonly int PowUpSc = 50;
     private readonly int CoinSc = 10;
 
-    private Text gameScore;           // Our reference to text component
+    private Text gameScore;
+    /// <summary>
+    /// The score of this game.
+    /// </summary>
     private int LocalScore;
     private Text HS_TXT;
     
@@ -147,6 +156,8 @@ public class PlayerScript : MonoBehaviour
                     gss.score=LocalScore;
                     //GameOver
                     gss.CurLevelName = "";
+                    bool nhs = false;//new high score
+                    int place = 0;
                     if (gss.score < PlayerSettingsScript.PlayerSettings.HighScore1)
                     {
                         if (gss.score < PlayerSettingsScript.PlayerSettings.HighScore2)
@@ -168,17 +179,21 @@ public class PlayerScript : MonoBehaviour
 
                                                         if (gss.score < PlayerSettingsScript.PlayerSettings.HighScore10)
                                                         {
-                                                            //Do nothing
+                                                            //Do nothing, not a high score
                                                         }
                                                         else
                                                         {
                                                             PlayerSettingsScript.PlayerSettings.HighScore10 = gss.score;
+                                                            nhs = true;
+                                                            place = 10;
                                                         }
                                                     }
                                                     else
                                                     {
                                                         PlayerSettingsScript.PlayerSettings.HighScore10 = PlayerSettingsScript.PlayerSettings.HighScore9;
                                                         PlayerSettingsScript.PlayerSettings.HighScore9 = gss.score;
+                                                        nhs = true;
+                                                        place = 9;
                                                     }
                                                 }
                                                 else
@@ -186,6 +201,8 @@ public class PlayerScript : MonoBehaviour
                                                     PlayerSettingsScript.PlayerSettings.HighScore9 = PlayerSettingsScript.PlayerSettings.HighScore8;
                                                     PlayerSettingsScript.PlayerSettings.HighScore10 = PlayerSettingsScript.PlayerSettings.HighScore9;
                                                     PlayerSettingsScript.PlayerSettings.HighScore8 = gss.score;
+                                                    nhs = true;
+                                                    place = 8;
                                                 }
                                             }
                                             else
@@ -194,6 +211,8 @@ public class PlayerScript : MonoBehaviour
                                                 PlayerSettingsScript.PlayerSettings.HighScore9 = PlayerSettingsScript.PlayerSettings.HighScore8;
                                                 PlayerSettingsScript.PlayerSettings.HighScore8 = PlayerSettingsScript.PlayerSettings.HighScore7;
                                                 PlayerSettingsScript.PlayerSettings.HighScore7 = gss.score;
+                                                nhs = true;
+                                                place = 7;
                                             }
                                         }
                                         else
@@ -203,6 +222,8 @@ public class PlayerScript : MonoBehaviour
                                             PlayerSettingsScript.PlayerSettings.HighScore8 = PlayerSettingsScript.PlayerSettings.HighScore7;
                                             PlayerSettingsScript.PlayerSettings.HighScore7 = PlayerSettingsScript.PlayerSettings.HighScore6;
                                             PlayerSettingsScript.PlayerSettings.HighScore6 = gss.score;
+                                            nhs = true;
+                                            place = 6;
                                         }
                                     }
                                     else
@@ -213,6 +234,8 @@ public class PlayerScript : MonoBehaviour
                                         PlayerSettingsScript.PlayerSettings.HighScore7 = PlayerSettingsScript.PlayerSettings.HighScore6;
                                         PlayerSettingsScript.PlayerSettings.HighScore6 = PlayerSettingsScript.PlayerSettings.HighScore5;
                                         PlayerSettingsScript.PlayerSettings.HighScore5 = gss.score;
+                                        nhs = true;
+                                        place = 5;
                                     }
                                 }
                                 else
@@ -224,6 +247,8 @@ public class PlayerScript : MonoBehaviour
                                     PlayerSettingsScript.PlayerSettings.HighScore6 = PlayerSettingsScript.PlayerSettings.HighScore5;
                                     PlayerSettingsScript.PlayerSettings.HighScore5 = PlayerSettingsScript.PlayerSettings.HighScore4;
                                     PlayerSettingsScript.PlayerSettings.HighScore4 = gss.score;
+                                    nhs = true;
+                                    place = 4;
                                 }
                             }
                             else
@@ -236,6 +261,8 @@ public class PlayerScript : MonoBehaviour
                                 PlayerSettingsScript.PlayerSettings.HighScore5 = PlayerSettingsScript.PlayerSettings.HighScore4;
                                 PlayerSettingsScript.PlayerSettings.HighScore4 = PlayerSettingsScript.PlayerSettings.HighScore3;
                                 PlayerSettingsScript.PlayerSettings.HighScore3 = gss.score;
+                                nhs = true;
+                                place = 3;
                             }
                         }
                         else
@@ -249,6 +276,8 @@ public class PlayerScript : MonoBehaviour
                             PlayerSettingsScript.PlayerSettings.HighScore4 = PlayerSettingsScript.PlayerSettings.HighScore3;
                             PlayerSettingsScript.PlayerSettings.HighScore3 = PlayerSettingsScript.PlayerSettings.HighScore2;
                             PlayerSettingsScript.PlayerSettings.HighScore2 = gss.score;
+                            nhs = true;
+                            place = 2;
                         }
                     }
                     else
@@ -263,10 +292,19 @@ public class PlayerScript : MonoBehaviour
                         PlayerSettingsScript.PlayerSettings.HighScore3 = PlayerSettingsScript.PlayerSettings.HighScore2;
                         PlayerSettingsScript.PlayerSettings.HighScore2 = PlayerSettingsScript.PlayerSettings.HighScore1;
                         PlayerSettingsScript.PlayerSettings.HighScore1 = gss.score;
+                        nhs = true;
+                        place = 1;
                     }
                     gss.score = 0;
                     PlayerSettingsScript.PlayerSettings.SaveSettings();
                     gss.SaveGame();
+                    if(nhs)
+                    {
+                        PlayerPrefs.SetInt("score", LocalScore);
+                        PlayerPrefs.SetInt("place", place);
+                        SceneManager.LoadScene("NewHS Page", LoadSceneMode.Single);
+                    }
+                    else
                     SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
                 }
                 else
