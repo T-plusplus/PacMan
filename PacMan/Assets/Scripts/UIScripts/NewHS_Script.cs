@@ -38,7 +38,7 @@ public class NewHS_Script : MonoBehaviour
     private Text[] UICursor;
 
     int place=0;
-    /*private void Awake()
+    private void Awake()
     {
 #if UNITY_EDITOR_WIN
 #if UNITY_ANDROID
@@ -64,7 +64,7 @@ public class NewHS_Script : MonoBehaviour
         Debug.Log("High Scores Page: WebGL");
         AndrCanvas.gameObject.SetActive(false);
 #endif
-    }*/
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +76,8 @@ public class NewHS_Script : MonoBehaviour
         UICursor = new Text[tmp.Length];
         for (int i = 0; i < tmp.Length; i++)
             UICursor[i] = tmp[i].GetComponent<Text>();
+
+#if UNITY_ANDROID
         //Buttons: Bind and add listeners
         UpB = GameObject.Find("UpB").GetComponent<Button>();
         UpB.onClick.AddListener(UpClick);
@@ -85,6 +87,10 @@ public class NewHS_Script : MonoBehaviour
         LeftB.onClick.AddListener(LeftClick);
         RightB = GameObject.Find("RightB").GetComponent<Button>();
         RightB.onClick.AddListener(RightClick);
+#endif
+#if UNITY_STANDALONE_WIN
+        InvokeRepeating("GetKeyboardInput", 0, .5f);
+#endif
         DoneB = GameObject.Find("DoneB").GetComponent<Button>();
         DoneB.onClick.AddListener(DoneClick);
 
@@ -103,6 +109,9 @@ public class NewHS_Script : MonoBehaviour
         //Set UICursor to the position in our backend
         for (int i = 0; i < UICursor.Length; i++)
             UICursor[i].gameObject.SetActive(i == cursor);
+#if UNITY_STANDALONE_WIN
+        
+#endif
     }
     /// <summary>
     /// Function that will handle which digit is being edited. The direction is which way we want to move the cursor.
@@ -143,6 +152,25 @@ public class NewHS_Script : MonoBehaviour
     private void RightClick()
     {
         MoveCursor(true);
+    }
+    private void GetKeyboardInput()
+    {
+        float horiz = Input.GetAxis("Horizontal");
+        float vert = Input.GetAxis("Vertical");
+        if (vert != 0)
+        {
+            if (vert > 0)
+                UpClick();
+            else if (vert < 0)
+                DownClick();
+        }
+        else
+        {
+            if (horiz > 0)
+                RightClick();
+            else if (horiz < 0)
+                LeftClick();
+        }
     }
     private void DoneClick()
     {
