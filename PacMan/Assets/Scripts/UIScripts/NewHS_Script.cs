@@ -91,6 +91,9 @@ public class NewHS_Script : MonoBehaviour
 #if UNITY_STANDALONE_WIN
         InvokeRepeating("GetKeyboardInput", 0, .5f);
 #endif
+#if UNITY_WEBGL
+        InvokeRepeating("GetKeyboardInput", 0, .5f);
+#endif
         DoneB = GameObject.Find("DoneB").GetComponent<Button>();
         DoneB.onClick.AddListener(DoneClick);
 
