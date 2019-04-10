@@ -7975,10 +7975,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1221869921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f013dbf304324f4c8a77356592b13b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 40e1292600d4c0b4c9a2c40b65fb413e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 0
   mat1: {fileID: 2100000, guid: db5eb3e3bb3357b459c65c40baa70080, type: 2}
   mat2: {fileID: 2100000, guid: ad01186791d51b14ea5e52699ba631dc, type: 2}
 --- !u!135 &1221869924
