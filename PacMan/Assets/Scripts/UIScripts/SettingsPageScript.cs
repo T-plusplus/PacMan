@@ -74,6 +74,10 @@ public class SettingsPageScript : MonoBehaviour {
         Keyboard_B = GameObject.Find(Keyboard_name).GetComponent<Button>();
         Keyboard_B.onClick.AddListener(Keyboard_OnClick);
 #endif
+#if UNITY_WEBGL
+        Keyboard_B = GameObject.Find(Keyboard_name).GetComponent<Button>();
+        Keyboard_B.onClick.AddListener(Keyboard_OnClick);
+#endif
         GetSelectedInput();
     }
     public void DPad_OnClick()
